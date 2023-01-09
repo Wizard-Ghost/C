@@ -1,0 +1,348 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+void introduction();
+void display(vector<string> board = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" });
+void game();
+
+int main()
+{
+	introduction();
+	display();
+	game();
+
+	system("pause");
+}
+
+void game()
+{
+	cout << "\n";
+
+	string playerX = " ";
+	string player1;
+	string player2;
+	string symbol1 = "X";
+	string symbol2 = "'X' or 'O'";
+	string currentSymbol;
+	int playerPosition = 0;
+	vector<string> board = { " ", " ", " ", " ", " ", " ", " ", " ", " ", " " };
+	bool turns = false;
+	bool set_positionError = false;
+
+	cout << "Player1: " << player1 << "Please enter your name: ";
+	cin >> player1;
+	cout << "Player2: " << player2 << "Please enter your name: ";
+	cin >> player2;
+
+	display(board);
+	cout << "\nPlayer 1: " << player1 << ", choose a letter, using \"X\" or \"O\": ";
+	cin >> symbol1;
+	symbol1 = symbol1[0];
+	symbol1 = symbol1 == "x" ? "X" : symbol1;
+	symbol1 = symbol1 == "o" ? "O" : symbol1;
+	symbol2 = symbol1 == "X" ? "O" : symbol2;
+	symbol2 = symbol1 == "O" ? "X" : symbol2;
+	cout << "\nPlayer 2: " << player2 << ", choose a letter, what are you prefer " << symbol2 << ": ";
+	cin >> symbol2;
+	symbol2 = symbol2[0];
+	symbol2 = symbol2 == "x" ? "X" : symbol2;
+	symbol2 = symbol2 == "o" ? "O" : symbol2;
+	if (symbol2 == symbol1 && symbol1 == "X")
+	{
+		cout << "Player 1: " << player1 << "is already " << symbol1 << ", so player 2 will be O " << player2 << "\n";
+		symbol2 = "O";
+	}
+	else if (symbol2 == symbol1 && symbol1 == "O")
+	{
+		cout << "Player 1 is already " << symbol1 << ", so player 2 will be X\n";
+		symbol2 = "X";
+	}
+
+	while (board[0] == " ")
+	{
+		cout << "\n\n";
+
+		cout << "\nPlayer 1: " << player1 << ": " << symbol1 << "\n";
+		cout << "Player 2: " << player2 << ": " << symbol2 << "\n";
+
+		display(board);
+		cout << "\n";
+		if (turns == false)
+		{
+			if (set_positionError == true)
+			{
+				cout << "Error, that position is already fill in, in use, or is not a numeric number. Player 1, try again: ";
+				set_positionError = false;
+			}
+			else {
+				cout << "Player 1 " << player1 << ", choose a position: ";
+				cin >> playerPosition;
+			}
+			if (!cin)
+			{
+				cin.clear();
+				cin.ignore();
+
+			}
+			currentSymbol = symbol1;
+
+		}
+		else
+		{
+			if (set_positionError == true)
+			{
+				cout << "Error, that position is already fill in, in use, or is not a numeric number. Player 2, try again: ";
+				set_positionError = false;
+			}
+			else
+				cout << "Player 2: " << player2 << ", choose a position: ";
+			cin >> playerPosition;
+			if (!cin)
+			{
+				cin.clear();
+				cin.ignore();
+
+			}
+			currentSymbol = symbol2;
+		}
+
+		switch (playerPosition)
+		{
+		case 1:
+			if (board[1] == " ")
+			{
+				board[1] = currentSymbol;
+				turns = !turns;
+			}
+			else
+				set_positionError = true;
+			break;
+		case 2:
+			if (board[2] == " ")
+			{
+				board[2] = currentSymbol;
+				turns = !turns;
+			}
+			else
+				set_positionError = true;
+			break;
+		case 3:
+			if (board[3] == " ")
+			{
+				board[3] = currentSymbol;
+				turns = !turns;
+			}
+			else
+				set_positionError = true;
+			break;
+		case 4:
+			if (board[4] == " ")
+			{
+				board[4] = currentSymbol;
+				turns = !turns;
+			}
+			else
+				set_positionError = true;
+			break;
+		case 5:
+			if (board[5] == " ")
+			{
+				board[5] = currentSymbol;
+				turns = !turns;
+			}
+			else
+				set_positionError = true;
+			break;
+		case 6:
+			if (board[6] == " ")
+			{
+				board[6] = currentSymbol;
+				turns = !turns;
+			}
+			else
+				set_positionError = true;
+			break;
+		case 7:
+			if (board[7] == " ")
+			{
+				board[7] = currentSymbol;
+				turns = !turns;
+			}
+			else
+				set_positionError = true;
+			break;
+		case 8:
+			if (board[8] == " ")
+			{
+				board[8] = currentSymbol;
+				turns = !turns;
+			}
+			else
+				set_positionError = true;
+			break;
+		case 9:
+			if (board[9] == " ")
+			{
+				board[9] = currentSymbol;
+				turns = !turns;
+			}
+			else
+				set_positionError = true;
+			break;
+		default:
+			cout << "Error: Invalid entry\n";
+			set_positionError = true;
+			break;
+		}
+
+		if (board[1] == symbol1 && board[2] == symbol1 && board[3] == symbol1)
+		{
+			board[0] = "";
+			playerX = "Player 1";
+			playerX = player1;
+		}
+		if (board[4] == symbol1 && board[5] == symbol1 && board[6] == symbol1)
+		{
+			board[0] = "";
+			playerX = "Player 1";
+			playerX = player1;
+		}
+		if (board[7] == symbol1 && board[8] == symbol1 && board[9] == symbol1)
+		{
+			board[0] = "";
+			playerX = "Player 1";
+			playerX = player1;
+		}
+		if (board[1] == symbol1 && board[4] == symbol1 && board[7] == symbol1)
+		{
+			board[0] = "";
+			playerX = "Player 1";
+			playerX = player1;
+		}
+		if (board[2] == symbol1 && board[5] == symbol1 && board[8] == symbol1)
+		{
+			board[0] = "";
+			playerX = "Player 1";
+			playerX = player1;
+		}
+		if (board[3] == symbol1 && board[6] == symbol1 && board[9] == symbol1)
+		{
+			board[0] = "";
+			playerX = "Player 1";
+			playerX = player1;
+		}
+		if (board[1] == symbol1 && board[5] == symbol1 && board[9] == symbol1)
+		{
+			board[0] = "";
+			playerX = "Player 1";
+			playerX = player1;
+		}
+		if (board[3] == symbol1 && board[5] == symbol1 && board[7] == symbol1)
+		{
+			board[0] = "";
+			playerX = "Player 1";
+			playerX = player1;
+		}
+
+
+		if (board[1] == symbol2 && board[2] == symbol2 && board[3] == symbol2)
+		{
+			board[0] = "";
+			playerX = "Player 2";
+			playerX = player2;
+		}
+		if (board[4] == symbol2 && board[5] == symbol2 && board[6] == symbol2)
+		{
+			board[0] = "";
+			playerX = "Player 2";
+			playerX = player2;
+		}
+		if (board[7] == symbol2 && board[8] == symbol2 && board[9] == symbol2)
+		{
+			board[0] = "";
+			playerX = "Player 2";
+			playerX = player2;
+		}
+		if (board[1] == symbol2 && board[4] == symbol2 && board[7] == symbol2)
+		{
+			board[0] = "";
+			playerX = "Player 2";
+			playerX = player2;
+		}
+		if (board[2] == symbol2 && board[5] == symbol2 && board[8] == symbol2)
+		{
+			board[0] = "";
+			playerX = "Player 2";
+			playerX = player2;
+		}
+		if (board[3] == symbol2 && board[6] == symbol2 && board[9] == symbol2)
+		{
+			board[0] = "";
+			playerX = "Player 2";
+			playerX = player2;
+		}
+		if (board[1] == symbol2 && board[5] == symbol2 && board[9] == symbol2)
+		{
+			board[0] = "";
+			playerX = "Player 2";
+			playerX = player2;
+		}
+		if (board[3] == symbol2 && board[5] == symbol2 && board[7] == symbol2)
+		{
+			board[0] = "";
+			playerX = "Player 2";
+			playerX = player2;
+		}
+
+		if (board[1] != " " && board[2] != " " && board[3] != " " &&
+			board[4] != " " && board[5] != " " && board[6] != " " &&
+			board[7] != " " && board[8] != " " && board[9] != " ")
+		{
+			board[0] = "";
+		}
+	}
+
+	cout << "\n\n\n";
+
+	cout << "\nPlayer 1: " << player1 << ": " << symbol1 << "\n";
+	cout << "Player 2: " << player2 << ": " << symbol2 << "\n";
+
+	display(board);
+	cout << "\n";
+	cout << "Game over. " << playerX << " wins!\n";
+
+}
+
+void introduction() {
+	cout << "================\n";
+	cout << "TIC-TAC-TOE\n";
+	cout << "================\n";
+	cout << "Instructions: Tic-Tac-Toe is a paper-and-pencil game for two players, 
+  X and O, who take turns marking the spaces in a 3x3 grid. 
+  The player who succeds in placing three of their marks in a horizontal, 
+  vertical or diagonal row wins the game.\n";
+}
+
+void display(vector<string> board) 
+{
+	vector<string> symbols2 = { "\n", "1", "2", "3", "4", "5", "6", "7", "8", "9", 
+  "   ", "  |  ", "   \n", " _____|_____|______\n", "      |     |      \n", "   " };
+	symbols2[1] = board[1];
+	symbols2[2] = board[2];
+	symbols2[3] = board[3];
+	symbols2[4] = board[4];
+	symbols2[5] = board[5];
+	symbols2[6] = board[6];
+	symbols2[7] = board[7];
+	symbols2[8] = board[8];
+	symbols2[9] = board[9];
+	cout << symbols2[0] << symbols2[10] << symbols2[1] << symbols2[11] << symbols2[2] << symbols2[11] << symbols2[3] << symbols2[12];
+	cout << symbols2[13] << symbols2[14];
+	cout << symbols2[10] << symbols2[4] << symbols2[11] << symbols2[5] << symbols2[11] << symbols2[6] << symbols2[12];
+	cout << symbols2[13] << symbols2[14];
+	cout << symbols2[10] << symbols2[7] << symbols2[11] << symbols2[8] << symbols2[11] << symbols2[9] << symbols2[12] << symbols2[0];
+	
+}
