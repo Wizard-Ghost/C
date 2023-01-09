@@ -16,7 +16,7 @@ using namespace std;
 
 #define rotate_left(x, n) (((x) << (n)) | ((x) >> (32-(n))))
 
-class hash
+class Hash
 {
 public:
 
@@ -36,7 +36,7 @@ public:
 	int value;
 };
 
-string hash::to_hex(unsigned int value) {
+string Hash::to_hex(unsigned int value) {
 	string out;
 	unsigned char hex;
 	char hex_res[3];
@@ -56,18 +56,18 @@ string hash::to_hex(unsigned int value) {
 	return out;
 }
 
-void hash::Init()
+void Hash::Init()
 {
 	character = 0;
 	count = 0;
 	int rest = 0;
 	int new_len = 0;
 	unsigned __int64 bit_lengh = 0;
-	A = 0x67452301, B = 0xefcdab89, C = 0x98badcfe, D = 0x10325476;// const
+	A = 0x67452301, B = 0xefcdab89, C = 0x98badcfe, D = 0x10325476;// початк знач констант
 	int s = 0;
 }
 
-char* hash::Stream()
+char* Hash::Stream()
 {
 	ifstream in;
 
@@ -108,8 +108,9 @@ char* hash::Stream()
 	return v;
 }
 
-void hash::steps(char* p)
+void Hash::step1(char* p)
 {
+	
 
 	rest = (count) % 64;
 
@@ -135,7 +136,9 @@ void hash::steps(char* p)
 		g[i] = 0;
 
 
-  bit_lengh = (unsigned __int64)(count * 8);
+	
+
+	bit_lengh = (unsigned __int64)(count * 8);
 	cout << endl << endl;
 
 
@@ -143,6 +146,7 @@ void hash::steps(char* p)
 	for (int i = 0; i < 8; i++)
 		g[new_len - 8 + i] = (unsigned char)(bit_lengh >> i * 8);
 
+	
 
 	unsigned int T[64];
 	for (int i = 0; i<64; i++)
@@ -176,7 +180,7 @@ void hash::steps(char* p)
 		C = D + rotate_left((C + F(D, A, B) + X[i + 14] + T[14]), 17);
 		B = C + rotate_left((B + F(C, D, A) + X[i + 15] + T[15]), 22);
 
-		//round2
+		//round 2
 		A = B + rotate_left((A + G(B, C, D) + X[i + 1] + T[16]), 5);
 		D = A + rotate_left((D + G(A, B, C) + X[i + 6] + T[17]), 9);
 		C = D + rotate_left((C + G(D, A, B) + X[i + 11] + T[18]), 14);
@@ -197,7 +201,7 @@ void hash::steps(char* p)
 		C = D + rotate_left((C + G(D, A, B) + X[i + 7] + T[30]), 14);
 		B = C + rotate_left((B + G(C, D, A) + X[i + 12] + T[31]), 20);
 
-		//round3
+		//round 3
 		A = B + rotate_left((A + H(B, C, D) + X[i + 5] + T[32]), 4);
 		D = A + rotate_left((D + H(A, B, C) + X[i + 8] + T[33]), 11);
 		C = D + rotate_left((C + H(D, A, B) + X[i + 11] + T[34]), 16);
@@ -218,7 +222,7 @@ void hash::steps(char* p)
 		C = D + rotate_left((C + H(D, A, B) + X[i + 15] + T[46]), 16);
 		B = C + rotate_left((B + H(C, D, A) + X[i + 2] + T[47]), 23);
 
-		//round4
+		//round 4
 		A = B + rotate_left((A + I(B, C, D) + X[i + 0] + T[48]), 6);
 		D = A + rotate_left((D + I(A, B, C) + X[i + 7] + T[49]), 10);
 		C = D + rotate_left((C + I(D, A, B) + X[i + 14] + T[50]), 15);
@@ -245,7 +249,7 @@ void hash::steps(char* p)
 		D = D + DD; 
 	}
 
-	cout << endl << "hash:" << endl;
+	cout << endl << "Hash function: " << endl;
 	string res = to_hex(A) + to_hex(B) + to_hex(C) + to_hex(D);
 	cout << res;
 }
@@ -253,7 +257,7 @@ void hash::steps(char* p)
 void main()
 {
 
-	hash h;
+	Hash h;
 	h.Init();
 	h.step1(h.Stream());
 	_getch();
