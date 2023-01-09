@@ -1,0 +1,25 @@
+#include <iostream>
+
+int main() {
+  
+  double pesos, reals, soles;
+  double dollars;
+  
+  std::cout << "Enter number of Columbian Pesos: ";
+  std::cin >> pesos;
+  std::cout << "Enter number of Brasil Reals: ";
+  std::cin >> reals;
+  std::cout << "Enter number of Peru Soles: ";
+  std::cin >> soles;
+
+// Declare values of the national currency to USD
+  double conversation_rate1 = 0.049;
+  double conversation_rate2 = 0.21;
+  double conversation_rate3 = 0.27;
+
+  dollars = (conversation_rate1 * pesos) + (conversation_rate2 * reals) + (conversation_rate3 * soles);
+
+  std::cout << "\nTotal US Dollars = $ " << dollars;
+
+  return 0;
+}
