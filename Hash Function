@@ -63,7 +63,7 @@ void Hash::Init()
 	int rest = 0;
 	int new_len = 0;
 	unsigned __int64 bit_lengh = 0;
-	A = 0x67452301, B = 0xefcdab89, C = 0x98badcfe, D = 0x10325476;// початк знач констант
+	A = 0x67452301, B = 0xefcdab89, C = 0x98badcfe, D = 0x10325476;// const
 	int s = 0;
 }
 
